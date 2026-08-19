@@ -1,0 +1,71 @@
+[
+  {
+    "name": "applicant_profiles",
+    "type": "base",
+    "system": false,
+    "listRule": "user = @request.auth.id",
+    "viewRule": "user = @request.auth.id",
+    "createRule": "user = @request.auth.id",
+    "updateRule": "user = @request.auth.id",
+    "deleteRule": "user = @request.auth.id",
+    "schema": [
+      { "name": "user", "type": "text", "required": true, "options": { "min": 1, "max": 100, "pattern": "" } },
+      { "name": "fullName", "type": "text", "required": true, "options": { "min": 1, "max": 200, "pattern": "" } },
+      { "name": "email", "type": "email", "required": true, "options": {} },
+      { "name": "phone", "type": "text", "required": false, "options": { "min": null, "max": 40, "pattern": "" } },
+      { "name": "baseResumeText", "type": "text", "required": true, "options": { "min": 1, "max": null, "pattern": "" } },
+      { "name": "linkedinUrl", "type": "url", "required": false, "options": {} },
+      { "name": "portfolioUrl", "type": "url", "required": false, "options": {} },
+      { "name": "notes", "type": "text", "required": false, "options": { "min": null, "max": null, "pattern": "" } }
+    ]
+  },
+  {
+    "name": "job_criteria",
+    "type": "base",
+    "system": false,
+    "listRule": "user = @request.auth.id",
+    "viewRule": "user = @request.auth.id",
+    "createRule": "user = @request.auth.id",
+    "updateRule": "user = @request.auth.id",
+    "deleteRule": "user = @request.auth.id",
+    "schema": [
+      { "name": "user", "type": "text", "required": true, "options": { "min": 1, "max": 100, "pattern": "" } },
+      { "name": "label", "type": "text", "required": false, "options": { "min": null, "max": 200, "pattern": "" } },
+      { "name": "titleKeywords", "type": "json", "required": true, "options": { "maxSize": 200000 } },
+      { "name": "excludeKeywords", "type": "json", "required": false, "options": { "maxSize": 200000 } },
+      { "name": "locations", "type": "json", "required": false, "options": { "maxSize": 200000 } },
+      { "name": "remoteOk", "type": "bool", "required": false, "options": {} },
+      { "name": "salaryMin", "type": "number", "required": false, "options": { "min": 0, "max": null, "noDecimal": true } },
+      { "name": "boardTokens", "type": "json", "required": true, "options": { "maxSize": 200000 } },
+      { "name": "active", "type": "bool", "required": false, "options": {} }
+    ]
+  },
+  {
+    "name": "applications",
+    "type": "base",
+    "system": false,
+    "listRule": "user = @request.auth.id",
+    "viewRule": "user = @request.auth.id",
+    "createRule": null,
+    "updateRule": null,
+    "deleteRule": null,
+    "schema": [
+      { "name": "user", "type": "text", "required": true, "options": { "min": 1, "max": 100, "pattern": "" } },
+      { "name": "criteria", "type": "text", "required": false, "options": { "min": null, "max": 100, "pattern": "" } },
+      { "name": "company", "type": "text", "required": true, "options": { "min": 1, "max": 200, "pattern": "" } },
+      { "name": "title", "type": "text", "required": true, "options": { "min": 1, "max": 300, "pattern": "" } },
+      { "name": "location", "type": "text", "required": false, "options": { "min": null, "max": 200, "pattern": "" } },
+      { "name": "url", "type": "url", "required": false, "options": {} },
+      { "name": "sourceBoard", "type": "select", "required": false, "options": { "maxSelect": 1, "values": ["greenhouse", "lever"] } },
+      { "name": "externalId", "type": "text", "required": true, "options": { "min": 1, "max": 200, "pattern": "" } },
+      { "name": "applyEmail", "type": "email", "required": false, "options": {} },
+      { "name": "matchScore", "type": "number", "required": false, "options": { "min": 0, "max": 100, "noDecimal": true } },
+      { "name": "matchReasons", "type": "json", "required": false, "options": { "maxSize": 200000 } },
+      { "name": "tailoredResume", "type": "text", "required": false, "options": { "min": null, "max": null, "pattern": "" } },
+      { "name": "tailoredCoverLetter", "type": "text", "required": false, "options": { "min": null, "max": null, "pattern": "" } },
+      { "name": "status", "type": "select", "required": true, "options": { "maxSelect": 1, "values": ["found", "tailoring", "pending_review", "approved", "submitted", "manual_required", "rejected", "error"] } },
+      { "name": "submissionMethod", "type": "select", "required": false, "options": { "maxSelect": 1, "values": ["email", "manual"] } },
+      { "name": "errorMessage", "type": "text", "required": false, "options": { "min": null, "max": null, "pattern": "" } }
+    ]
+  }
+]

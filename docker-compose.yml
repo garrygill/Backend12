@@ -1,0 +1,19 @@
+services:
+  pocketbase:
+    build: .
+    ports:
+      - "8080:8080"
+    volumes:
+      - pb_data:/pb/pb_data
+
+  apply-engine:
+    build: ./apply-engine
+    env_file:
+      - ./apply-engine/.env
+    depends_on:
+      - pocketbase
+    ports:
+      - "8787:8787"
+
+volumes:
+  pb_data:
