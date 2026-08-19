@@ -10,6 +10,9 @@ export function authenticateAdmin(): Promise<void> {
     return Promise.resolve();
   }
   if (!authPromise) {
+    if (!config.pbAdminEmail || !config.pbAdminPassword) {
+      return Promise.reject(new Error('Missing PB_ADMIN_EMAIL/PB_ADMIN_PASSWORD environment variables'));
+    }
     authPromise = pb.admins
       .authWithPassword(config.pbAdminEmail, config.pbAdminPassword)
       .then(() => undefined)

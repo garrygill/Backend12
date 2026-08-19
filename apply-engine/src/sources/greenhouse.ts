@@ -47,6 +47,6 @@ function stripHtml(html: string): string {
 }
 
 function extractApplyEmail(text: string): string | undefined {
-  const match = text.match(/apply[^.\n]{0,40}?([\w.+-]+@[\w-]+\.[\w.-]+)/i) ?? text.match(/[\w.+-]+@[\w-]+\.[\w.-]+/);
+  const match = text.match(/apply[^.\n]{0,40}?([\w.+-]+@[\w-]+\.[\w.-]*\w)/i) ?? text.match(/[\w.+-]+@[\w-]+\.[\w.-]*\w/);
   return match?.[1] ?? match?.[0];
 }

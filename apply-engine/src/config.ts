@@ -1,17 +1,9 @@
 import 'dotenv/config';
 
-function requireEnv(name: string): string {
-  const value = process.env[name];
-  if (!value) {
-    throw new Error(`Missing required environment variable: ${name}`);
-  }
-  return value;
-}
-
 export const config = {
   pocketbaseUrl: process.env.POCKETBASE_URL ?? 'http://127.0.0.1:8080',
-  pbAdminEmail: requireEnv('PB_ADMIN_EMAIL'),
-  pbAdminPassword: requireEnv('PB_ADMIN_PASSWORD'),
+  pbAdminEmail: process.env.PB_ADMIN_EMAIL || undefined,
+  pbAdminPassword: process.env.PB_ADMIN_PASSWORD || undefined,
   anthropicModel: process.env.ANTHROPIC_MODEL ?? 'claude-sonnet-5',
   port: Number(process.env.PORT ?? 8787),
   smtp: {

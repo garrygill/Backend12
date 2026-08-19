@@ -2,7 +2,14 @@ import Anthropic from '@anthropic-ai/sdk';
 import { config } from './config.js';
 import { ApplicantProfile, JobListing } from './types.js';
 
-const anthropic = new Anthropic();
+let anthropic: Anthropic | null = null;
+
+function getClient(): Anthropic {
+  if (!anthropic) {
+    anthropic = new Anthropic();
+  }
+  return anthropic;
+}
 
 export interface TailoredMaterials {
   resumeSummary: string;
@@ -34,7 +41,7 @@ RESUME_SUMMARY:
 COVER_LETTER:
 <text>`;
 
-  const message = await anthropic.messages.create({
+  const message = await getClient().messages.create({
     model: config.anthropicModel,
     max_tokens: 1200,
     messages: [{ role: 'user', content: prompt }],
@@ -48,7 +55,7 @@ COVER_LETTER:
   return parseTailoredText(text);
 }
 
-function parseTailoredText(text: string): TailoredMaterials {
+export function parseTailoredText(text: string): TailoredMaterials {
   const resumeMatch = text.match(/RESUME_SUMMARY:\s*([\s\S]*?)\n\s*COVER_LETTER:/i);
   const coverMatch = text.match(/COVER_LETTER:\s*([\s\S]*)/i);
   return {
